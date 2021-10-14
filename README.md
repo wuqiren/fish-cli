@@ -1,2 +1,4 @@
 # fish-cli
-一个react项目的脚手架
+
+一个 react 项目的脚手架
+ddd
