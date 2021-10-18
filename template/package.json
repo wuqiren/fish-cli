@@ -1,32 +1,15 @@
 {
-  "demoName": "fish-cli",
+  "name": "template",
   "version": "1.0.0",
-  "description": "react脚手架",
   "main": "index.js",
-  "bin": {
-    "fishcli": "./bin/fishcli.js"
+  "license": "MIT",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^5.4.0",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wuqiren/fish-cli.git"
-  },
-  "keywords": [
-    "fish-cli",
-    "react"
-  ],
-  "demoAuthor": "fishfan",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wuqiren/fish-cli/issues"
-  },
-  "homepage": "https://github.com/wuqiren/fish-cli#readme",
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "commander": "^8.2.0",
-    "inquirer": "^8.2.0",
-    "which": "^2.0.2"
+    "build": "webpack --config ./workflow/webpack.base.config.js"
   }
 }
