@@ -1,4 +1,5 @@
 import '../css/index.css';
+import '../css/index.less';
 function login() {
   const oH2 = document.createElement('h2');
   oH2.innerHTML = 'fish-cli';
