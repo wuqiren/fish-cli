@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 module.exports = {
   entry: {
     app: './src/index.js',
@@ -12,6 +12,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
       {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
@@ -27,9 +31,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: '婚纱店假按揭客户端啦',
+      title: 'fishfan的脚手架工具',
       template: path.resolve(__dirname, '../public/index.html'),
       filename: 'fish.html',
     }),
+    new FriendlyErrorsWebpackPlugin(),
   ],
 };
