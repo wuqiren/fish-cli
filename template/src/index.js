@@ -1,9 +1,7 @@
-import '../css/index.css';
-import '../css/index.less';
+import ImgSrc from './img/fish.jpeg';
 function login() {
-  const oH2 = document.createElement('h2');
-  oH2.innerHTML = 'fish-cli';
-  oH2.className = 'title';
-  return oH2;
+  const IMG = document.createElement('img');
+  IMG.src = ImgSrc;
+  return IMG;
 }
 document.body.appendChild(login());

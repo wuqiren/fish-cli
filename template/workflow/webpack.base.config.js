@@ -14,7 +14,16 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          'postcss-loader',
+        ],
       },
       {
         test: /\.less$/,
@@ -24,6 +33,25 @@ module.exports = {
         test: /\.m?js$/,
         exclude: /(node_modules|bower_components)/,
         use: ['babel-loader'],
+      },
+      {
+        test: /\.(png|svg|gif|jpe?g)$/,
+        type: 'asset',
+        generator: {
+          filename: 'img/[name].[hash:4]:[ext]',
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 60 * 1024,
+          },
+        },
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2?)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'font/[name].[hash:3]:[ext]',
+        },
       },
     ],
   },
