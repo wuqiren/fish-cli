@@ -1,7 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 module.exports = {
   entry: {
     app: './src/index.js',
@@ -9,6 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].bundle.js',
+    clean: true, // webpack5 自带的清空dist目录功能
   },
   module: {
     rules: [
@@ -56,12 +55,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'fishfan的脚手架工具',
       template: path.resolve(__dirname, '../public/index.html'),
-      filename: 'fish.html',
     }),
-    new FriendlyErrorsWebpackPlugin(),
   ],
 };

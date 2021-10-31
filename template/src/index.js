@@ -5,3 +5,5 @@ function login() {
   return IMG;
 }
 document.body.appendChild(login());
+
+console.log('222233322');
