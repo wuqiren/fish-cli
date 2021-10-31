@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
-    app: './src/index.js',
+    app: './src/index.tsx',
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -51,6 +51,19 @@ module.exports = {
         generator: {
           filename: 'font/[name].[hash:3]:[ext]',
         },
+      },
+      {
+        test: /\.(js|ts|jsx|tsx)$/,
+        include: path.appSrc,
+        use: [
+          {
+            loader: 'esbuild-loader',
+            options: {
+              loader: 'tsx',
+              target: 'es2015',
+            },
+          },
+        ],
       },
     ],
   },
