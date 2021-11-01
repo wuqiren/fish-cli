@@ -31,7 +31,7 @@
     "webpack-merge": "^5.8.0"
   },
   "scripts": {
-    "build": "webpack --config ./workflow/webpack.dev.config.js",
+    "build": "webpack --config ./workflow/webpack.prod.config.js",
     "dev": "webpack serve --config ./workflow/webpack.dev.config.js"
   },
   "browserslist": [

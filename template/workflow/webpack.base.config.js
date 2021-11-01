@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { resolve } = require('path');
 module.exports = {
   entry: {
     app: './src/index.tsx',
@@ -8,6 +9,12 @@ module.exports = {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].bundle.js',
     clean: true, // webpack5 自带的清空dist目录功能
+  },
+  resolve: {
+    alias: {
+      '@': resolve('src'),
+    },
+    extensions: ['.js', '.jsx', '.ts', '.tsx'], //没有写后缀时进行补全
   },
   module: {
     rules: [
