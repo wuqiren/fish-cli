@@ -21,9 +21,9 @@ const question = [
   },
   {
     type: 'list' /* 选择框 */,
-    message: '请选择公共管理状态？',
+    message: '请选择公共管理状态,抱歉没得选，只有zustand一个^_^',
     name: 'state',
-    choices: ['mobx', 'redux'] /* 选项*/,
+    choices: ['zustand'] /* 选项*/,
     filter: function (val) {
       /* 过滤 */
       return val.toLowerCase();
