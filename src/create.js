@@ -1,12 +1,11 @@
 const fs = require('fs');
+const { Buffer } = require('buffer');
 const utils = require('../utils');
-const npm = require('./install');
 
 /* 三变量判断异步操作 */
 let fileCount = 0; /* 文件数量 */
 let dirCount = 0; /* 文件夹数量 */
 let flat = 0; /* readir数量 */
-let isInstall = false;
 
 module.exports = function (res) {
   /* 创建文件 */
@@ -15,11 +14,11 @@ module.exports = function (res) {
   utils.blue('当前路径:' + process.cwd());
   /* 修改package.json*/
   revisePackageJson(res, sourcePath).then(() => {
-    copy(sourcePath, process.cwd(), npm());
+    copy(sourcePath, process.cwd());
   });
 };
 
-function copy(sourcePath, currentPath, cb) {
+const copy = (sourcePath, currentPath)=> {
   flat++;
   fs.readdir(sourcePath, (err, paths) => {
     flat--;
@@ -40,11 +39,10 @@ function copy(sourcePath, currentPath, cb) {
           readSteam.pipe(writeSteam);
           utils.green('创建文件：' + newCurrentPath);
           fileCount--;
-          completeControl(cb);
         } else if (stat.isDirectory()) {
           if (path !== '.git' && path !== 'package.json') {
             dirCount++;
-            dirExist(newSoucePath, newCurrentPath, copy, cb);
+            dirExist(newSoucePath, newCurrentPath, copy);
           }
         }
       });
@@ -52,58 +50,33 @@ function copy(sourcePath, currentPath, cb) {
   });
 }
 
-function dirExist(sourcePath, currentPath, copyCallback, cb) {
-  fs.exists(currentPath, (ext) => {
-    if (ext) {
-      copyCallback(sourcePath, currentPath, cb);
+const dirExist =(sourcePath, currentPath, copyCallback)=> {
+  fs.exists(currentPath,(exist) => {
+    if (exist) {
+      copyCallback(sourcePath, currentPath);
     } else {
       fs.mkdir(currentPath, () => {
         fileCount--;
         dirCount--;
-        copyCallback(sourcePath, currentPath, cb);
+        copyCallback(sourcePath, currentPath);
         utils.yellow('创建文件夹：' + currentPath);
-        completeControl(cb);
       });
     }
   });
 }
-function completeControl(cb) {
-  if (fileCount === 0 && dirCount === 0 && flat === 0) {
-    utils.green('------构建完成-------');
-    if (cb && !isInstall) {
-      isInstall = true;
-      utils.blue('-----开始install-----');
-      cb(() => {
-        utils.blue('-----完成install-----');
-        /* 判断是否存在webpack  */
-        runProject();
-      });
-    }
-  }
-}
 
-function runProject() {
-  try {
-    const doing = npm(['start']);
-    doing();
-  } catch (e) {
-    utils.red('自动启动失败，请手动npm start 启动项目');
-  }
-}
-
-function revisePackageJson(res, sourcePath) {
-  return new Promise((resolve) => {
-    fs.readFile(sourcePath + '/package.json', (err, data) => {
-      if (err) throw err;
-      const { author, name } = res;
-      let json = data.toString();
-      json = json.replace(/demoName/g, name.trim());
-      json = json.replace(/demoAuthor/g, author.trim());
-      const path = process.cwd() + '/package.json';
-      fs.writeFile(path, new Buffer(json), () => {
-        utils.green('创建文件：' + path);
-        resolve();
-      });
+const revisePackageJson = (res, sourcePath) => new Promise((resolve) => {
+  fs.readFile(sourcePath + '/package.json', (err, data) => {
+    if (err) throw err;
+    const { author, name } = res;
+    let json = data.toString();
+    json = json.replace(/demoname/g, name.trim());
+    json = json.replace(/demoAuthor/g, author.trim());
+    const path = process.cwd() + '/package.json';
+    const data1 = new Uint8Array(Buffer.from(json));
+    fs.writeFile(path, data1, () => {
+      utils.green('创建文件：' + path);
+      resolve();
     });
   });
-}
+});

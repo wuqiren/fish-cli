@@ -1,8 +1,9 @@
 {
-  "name": "template",
+  "name": "demoname",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "author": "demoAuthor",
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
