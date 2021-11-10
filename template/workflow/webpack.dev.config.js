@@ -11,7 +11,7 @@ const devConfig = {
     // static: '../dist',
     historyApiFallback: true, // 所有的404都会连接到index.html
     open: false,
-    hot: 'only', // 启用热模块替换功能，在构建失败时不刷新页面作为回退
+    hot:true, // 启用热模块替换功能，浏览器会自动刷新
     port: 8080,
     compress: true, //打包
   },
