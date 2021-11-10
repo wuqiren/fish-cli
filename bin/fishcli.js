@@ -42,7 +42,7 @@ program
       if (answer.conf) {
         create(answer);
       } else {
-        yellow('这次没关系，希望以后有合作机会!');
+        yellow('没关系，希望以后有合作机会!');
       }
     });
   });
