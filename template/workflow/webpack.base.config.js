@@ -7,7 +7,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].bundle.js',
+    filename: '[name].[hash:8].js',
     clean: true, // webpack5 自带的清空dist目录功能
   },
   resolve: {
