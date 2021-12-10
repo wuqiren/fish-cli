@@ -10,7 +10,7 @@ let flat = 0; /* readir数量 */
 module.exports = function (res) {
   /* 创建文件 */
   utils.green('------开始构建-------');
-  const sourcePath = __dirname.slice(0, -3) + `${res.type}Template`;
+  const sourcePath = __dirname.slice(0, -3) + `${res.type}-template`;
   utils.blue('当前路径:' + process.cwd());
   /* 修改package.json*/
   revisePackageJson(res, sourcePath).then(() => {
