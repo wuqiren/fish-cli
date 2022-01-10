@@ -1,6 +1,7 @@
 {
-  "name": "vite",
+  "name": "demoname",
   "version": "0.0.0",
+  "author": "demoAuthor",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
