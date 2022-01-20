@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const program = require('commander');
 const inquirer = require('inquirer');
-const create = require('../src/create');
+const create = require('../src/create1');
 const consoleColors = require('../utils');
 const question = [
   {
