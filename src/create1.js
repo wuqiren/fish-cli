@@ -41,7 +41,10 @@ module.exports = async (res)=> {
 
 };
 
-const copy = (sourcePath, currentPath)=> {
+const copy = (sourcePath, currentPath) => {
+  fs.copy(sourcePath, currentPath, err => {
+    console.log(err,'????')
+  })
   fs.readdir(sourcePath, (err, paths) => {
     if (err) {
       throw err;
@@ -83,14 +86,13 @@ const dirExist =(sourcePath, currentPath, copyCallback)=> {
 }
 
 const revisePackageJson = (res, sourcePath, path) => new Promise((resolve) => {
-  fs.readFile(sourcePath + '/package.json', (err, data) => {
+  fs.readFile(sourcePath + '/package.json','utf8', (err, data) => {
     if (err) throw err;
     const { author, name } = res;
-    let json = data.toString();
+    let json = data;
     json = json.replace(/demoname/g, name.trim());
     json = json.replace(/demoAuthor/g, author.trim());
-    const data1 = new Uint8Array(Buffer.from(json));
-    fs.writeFile(path, data1, () => {
+    fs.writeFile(path, json, () => {
       utils.green('创建文件：' + path);
       resolve();
     });
