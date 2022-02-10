@@ -1,5 +1,5 @@
 const chalk = require('chalk');
-const colors = ['green', 'blue', 'yellow', 'red'];
+const colors = ['green', 'blue', 'yellow', 'red','greenBright'];
 const consoleColors = {};
 colors.forEach((color) => {
   consoleColors[color] = function (text, isConsole = true) {
